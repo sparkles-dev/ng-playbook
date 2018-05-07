@@ -1,2 +1,3 @@
 # ng-playbook
-Patterns and code snippets for Angular.
+
+> Patterns and code snippets for Angular.
