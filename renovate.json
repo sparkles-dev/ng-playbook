@@ -7,7 +7,8 @@
     "monorepo:nrwl",
     "schedule:nonOfficeHours",
     ":maintainLockFilesWeekly",
-    ":label(renovate)"
+    ":label(renovate)",
+    ":semanticCommitScopeDisabled"
   ],
   "packageRules": [
     {
