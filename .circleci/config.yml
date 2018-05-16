@@ -9,8 +9,9 @@ jobs:
       - checkout
       - restore_cache:
           key: v1-{{ checksum  "yarn.lock" }}
-      - run: yarn test
+      - run: yarn install --frozen-lockfile --non-interactive
       - save_cache:
           paths:
             - ~/app/node_modules
           key: v1-{{ checksum  "yarn.lock" }}
+      - run: yarn test
