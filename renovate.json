@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "config:base",
+    "monorepo:angular",
+    "monorepo:commitlint",
+    "monorepo:ngrx",
+    "monorepo:nrwl",
+    "schedule:nonOfficeHours",
+    ":maintainLockFilesWeekly",
+    ":label(renovate)",
+    ":semanticCommitScopeDisabled"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "semanticCommitType": "build"
+    },
+    {
+      "depTypeList": ["dependencies"],
+      "semanticCommitType": "fix"
+    }
+  ],
+  "pinVersions": false
+}
