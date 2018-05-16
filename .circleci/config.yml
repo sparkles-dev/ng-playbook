@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    docker:
+      - image: angular/ngcontainer
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-{{ checksum  "yarn.lock" }}
+      - run: yarn test
+      - save_cache:
+          paths:
+            - ~/app/node_modules
+          key: v1-{{ checksum  "yarn.lock" }}
