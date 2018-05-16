@@ -1,19 +1,16 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/spec",
+    "outDir": "../dist/out-tsc/tools",
+    "rootDir": ".",
     "module": "commonjs",
+    "target": "es5",
     "types": [
       "jasmine",
       "node"
     ]
   },
-  "files": [
-    "test.ts",
-    "polyfills.ts"
-  ],
   "include": [
-    "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.ts"
   ]
 }
