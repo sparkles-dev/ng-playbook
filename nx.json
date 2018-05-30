@@ -1,5 +1,14 @@
 {
   "npmScope": "ng-playbook",
   "projects": {
+    "testing": {
+      "tags": []
+    },
+    "playbook": {
+      "tags": []
+    },
+    "playbook-e2e": {
+      "tags": []
+    }
   }
 }

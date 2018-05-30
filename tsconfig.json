@@ -16,8 +16,8 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@foo/*": [
-        "libs/*"
+      "@ng-playbook/testing": [
+        "libs/testing/src/index.ts"
       ]
     }
   },
