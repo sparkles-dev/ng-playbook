@@ -12,6 +12,9 @@
     },
     "testing-patterns": {
       "tags": []
+    },
+    "css-grid": {
+      "tags": []
     }
   }
 }

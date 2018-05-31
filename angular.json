@@ -172,6 +172,35 @@
           }
         }
       }
+    },
+    "css-grid": {
+      "root": "libs/css-grid",
+      "sourceRoot": "libs/css-grid/src",
+      "projectType": "library",
+      "prefix": "ng-playbook",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/css-grid/src/test.ts",
+            "tsConfig": "libs/css-grid/tsconfig.spec.json",
+            "karmaConfig": "libs/css-grid/karma.conf.js",
+            "sourceMap": false
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/css-grid/tsconfig.lib.json",
+              "libs/css-grid/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

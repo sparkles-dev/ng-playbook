@@ -30,4 +30,8 @@ export class DomElementRef {
   get innerHTML(): string {
     return this.elementRef.nativeElement.innerHTML;
   }
+
+  getComputedStyle(): CSSStyleDeclaration {
+    return window.getComputedStyle(this.elementRef.nativeElement);
+  }
 }

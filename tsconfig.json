@@ -21,6 +21,9 @@
       ],
       "@ng-playbook/testing-patterns": [
         "libs/testing-patterns/src/index.ts"
+      ],
+      "@ng-playbook/css-grid": [
+        "libs/css-grid/src/index.ts"
       ]
     }
   },
