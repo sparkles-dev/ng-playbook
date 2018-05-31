@@ -151,5 +151,5 @@
     "defaultCollection": "@nrwl/schematics",
     "packageManager": "yarn"
   },
-  "defaultProject": "testing"
+  "defaultProject": "playbook"
 }
