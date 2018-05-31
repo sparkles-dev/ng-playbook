@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "ngPlaybook",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "ng-playbook",
+      "kebab-case"
+    ]
+  }
+}

@@ -18,6 +18,9 @@
     "paths": {
       "@ng-playbook/testing": [
         "libs/testing/src/index.ts"
+      ],
+      "@ng-playbook/testing-patterns": [
+        "libs/testing-patterns/src/index.ts"
       ]
     }
   },

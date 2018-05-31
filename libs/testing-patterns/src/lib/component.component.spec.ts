@@ -1,25 +1,9 @@
 import { Component, ElementRef, ComponentRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DomElementRef } from '@ng-playbook/testing';
 import { ComponentComponent } from './component.component';
 
-class DomElementRef {
-
-  constructor(
-    public readonly elementRef: ElementRef
-  ) {}
-
-  querySelector(selector: string) {
-    const result = this.elementRef.nativeElement.querySelector(selector);
-
-    return new DomElementRef(new ElementRef(result));
-  }
-
-  public attribute(name: string): any {
-    return this.elementRef.nativeElement.getAttribute(name);
-  }
-}
-
-describe('ComponentComponent (fixure testing)', () => {
+describe('ComponentComponent (fixture testing)', () => {
   let component: ComponentComponent;
   let fixture: ComponentFixture<ComponentComponent>;
 

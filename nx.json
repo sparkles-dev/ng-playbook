@@ -9,6 +9,9 @@
     },
     "playbook-e2e": {
       "tags": []
+    },
+    "testing-patterns": {
+      "tags": []
     }
   }
 }

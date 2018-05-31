@@ -144,10 +144,41 @@
           }
         }
       }
+    },
+    "testing-patterns": {
+      "root": "libs/testing-patterns",
+      "sourceRoot": "libs/testing-patterns/src",
+      "projectType": "library",
+      "prefix": "ng-playbook",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/testing-patterns/src/test.ts",
+            "tsConfig": "libs/testing-patterns/tsconfig.spec.json",
+            "karmaConfig": "libs/testing-patterns/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/testing-patterns/tsconfig.lib.json",
+              "libs/testing-patterns/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
-    "typescriptMismatch": false,
+    "warnings": {
+      "typescriptMismatch": true,
+      "versionMismatch": true
+    },
     "defaultCollection": "@nrwl/schematics",
     "packageManager": "yarn"
   },
