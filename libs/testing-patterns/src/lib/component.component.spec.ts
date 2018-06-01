@@ -115,21 +115,11 @@ describe(`ComponentComponent (integration)`, () => {
       fixture.componentInstance.component.valueChanges.subscribe(
         (val) => {
           value = value + val;
-debugger;
         }
       );
 
       const elem = fixture.componentInstance.domElementRef.querySelector('input');
-      elem.elementRef.nativeElement.value = 'bar'
-      //elem.dispatchEvent('change', { target: { value: 'b' }});
-      //elem.dispatchEvent('change', { target: { value: 'ba' }});
-      elem.dispatchKeyEvent('keydown', R);
-      elem.dispatchKeyEvent('keypress', R);
-      elem.dispatchKeyEvent('keyup', R);
-      /*
-      elem.dispatchKeyEvent('keyup', A);
-      elem.dispatchKeyEvent('keyup', R);
-      */
+      elem.typeIn('bar');
       expect(value).toEqual('bar');
     }));
   });
