@@ -7,7 +7,8 @@ import { ControlValueAccessor } from '@angular/forms';
     <input #textfield
       type="text"
       [attr.value]="value"
-      [placeholder]="placeholder">
+      [placeholder]="placeholder"
+      (keyup)="onKeyUp($event)">
   `,
   styles: []
 })
@@ -56,6 +57,11 @@ export class ComponentComponent implements OnInit, ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  onKeyUp(evt: KeyboardEvent) {
+debugger;
+    this.valueChanges.emit(this.textfieldElementRef.nativeElement.value);
   }
 
 }

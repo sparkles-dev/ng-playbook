@@ -1,6 +1,7 @@
 import { Component, ElementRef, ComponentRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DomElementRef } from '@ng-playbook/testing';
+import { B, A, R } from '@angular/cdk/keycodes';
 import { ComponentComponent } from './component.component';
 
 describe('ComponentComponent (fixture testing)', () => {
@@ -105,6 +106,32 @@ describe(`ComponentComponent (integration)`, () => {
 
       expect(element.querySelector('input[type="text"]').attribute('disabled')).toBeTruthy();
     });
+  });
+
+  describe(`valueChanges`, () => {
+    it(`should emit on each typed character`, fakeAsync(() => {
+      const fixture = TestingComponent.create();
+      let value = '';
+      fixture.componentInstance.component.valueChanges.subscribe(
+        (val) => {
+          value = value + val;
+debugger;
+        }
+      );
+
+      const elem = fixture.componentInstance.domElementRef.querySelector('input');
+      elem.elementRef.nativeElement.value = 'bar'
+      //elem.dispatchEvent('change', { target: { value: 'b' }});
+      //elem.dispatchEvent('change', { target: { value: 'ba' }});
+      elem.dispatchKeyEvent('keydown', R);
+      elem.dispatchKeyEvent('keypress', R);
+      elem.dispatchKeyEvent('keyup', R);
+      /*
+      elem.dispatchKeyEvent('keyup', A);
+      elem.dispatchKeyEvent('keyup', R);
+      */
+      expect(value).toEqual('bar');
+    }));
   });
 
 });
