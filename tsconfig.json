@@ -24,6 +24,9 @@
       ],
       "@ng-playbook/css-grid": [
         "libs/css-grid/src/index.ts"
+      ],
+      "@ng-playbook/forms": [
+        "libs/forms/src/index.ts"
       ]
     }
   },

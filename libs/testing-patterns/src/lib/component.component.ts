@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output, Input, Renderer2, ViewChild, ElementRef } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'ng-playbook-component',
@@ -9,10 +8,9 @@ import { ControlValueAccessor } from '@angular/forms';
       [attr.value]="value"
       [placeholder]="placeholder"
       (keyup)="onKeyUp($event)">
-  `,
-  styles: []
+  `
 })
-export class ComponentComponent implements OnInit, ControlValueAccessor {
+export class ComponentComponent implements OnInit {
 
   @Input()
   public value: any;
@@ -43,24 +41,7 @@ export class ComponentComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
-  writeValue(obj: any): void {
-    throw new Error("Method not implemented.");
-  }
-
-  registerOnChange(fn: any): void {
-    throw new Error("Method not implemented.");
-  }
-
-  registerOnTouched(fn: any): void {
-    throw new Error("Method not implemented.");
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
   onKeyUp(evt: KeyboardEvent) {
-debugger;
     this.valueChanges.emit(this.textfieldElementRef.nativeElement.value);
   }
 
