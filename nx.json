@@ -18,6 +18,21 @@
     },
     "forms": {
       "tags": []
+    },
+    "reframe": {
+      "tags": []
+    },
+    "madre": {
+      "tags": []
+    },
+    "madre-e2e": {
+      "tags": []
+    },
+    "figlio": {
+      "tags": []
+    },
+    "figlio-e2e": {
+      "tags": []
     }
   }
 }

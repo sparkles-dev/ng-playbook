@@ -27,6 +27,9 @@
       ],
       "@ng-playbook/forms": [
         "libs/forms/src/index.ts"
+      ],
+      "@ng-playbook/reframe": [
+        "libs/reframe/src/index.ts"
       ]
     }
   },
