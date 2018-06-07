@@ -30,6 +30,9 @@
       ],
       "@ng-playbook/reframe": [
         "libs/reframe/src/index.ts"
+      ],
+      "@ng-playbook/elementals": [
+        "libs/elementals/src/index.ts"
       ]
     }
   },

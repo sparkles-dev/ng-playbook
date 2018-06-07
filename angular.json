@@ -486,6 +486,34 @@
           }
         }
       }
+    },
+    "elementals": {
+      "root": "libs/elementals",
+      "sourceRoot": "libs/elementals/src",
+      "projectType": "library",
+      "prefix": "ng-playbook",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/elementals/src/test.ts",
+            "tsConfig": "libs/elementals/tsconfig.spec.json",
+            "karmaConfig": "libs/elementals/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/elementals/tsconfig.lib.json",
+              "libs/elementals/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <script src="./zone.js"></script>
+    <script src="./rxjs.umd.js"></script>
+    <script src="./core.umd.js"></script>
+    <script src="./common.umd.js"></script>
+    <script src="./platform-browser.umd.js"></script>
+    <script src="./compiler.umd.js"></script>
+    <script src="./elements.umd.js"></script>
+    <script src="./platform-browser-dynamic.umd.js"></script>
+    <script src="./ng-playbook-elements.umd.js"></script>
+
+    <ng-playbook-elements></ng-playbook-elements>
+
+    <!--
+
+      Uncaught TypeError: Failed to construct 'HTMLElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function.
+    at NgElementImpl.NgElement [as constructor] (elements.umd.js:459)
+    at new NgElementImpl (elements.umd.js:495)
+NgElement @ elements.umd.js:459
+NgElementImpl @ elements.umd.js:495
+
+    -->
+  </body>
+</html>
