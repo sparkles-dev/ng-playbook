@@ -14,4 +14,4 @@ jobs:
           paths:
             - ~/app/node_modules
           key: v1-{{ checksum  "yarn.lock" }}
-      - run: yarn test
+      - run: xvfb-run -a yarn test
