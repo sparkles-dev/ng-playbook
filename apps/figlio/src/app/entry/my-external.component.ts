@@ -7,7 +7,7 @@ import { AppLaunch, ReframedUrl } from "@ng-playbook/reframe";
     <pre>{{ url | json }}</pre>
     <button reframeFinish>FINISH</button>
     <button reframeCancel>CANCEL</button>
-    <a routerLink="'/foo">go to foo</a>
+    <a [routerLink]="['/foo']">go to foo</a>
   `
 })
 export class MyExternalComponent implements AppLaunch {

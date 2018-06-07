@@ -13,7 +13,7 @@ export class CancelDirective {
   @HostListener('click')
   public onClick() {
 debugger;
-    this.messages.cancel(new ElementRef(window.top), '');
+    this.messages.cancel(new ElementRef(window.parent), '');
   }
 
 }

@@ -12,7 +12,7 @@ export class FinishDirective {
 
   @HostListener('click')
   public onClick() {
-    this.messages.finish(new ElementRef(window.top), '');
+    this.messages.finish(new ElementRef(window.parent), '');
   }
 
 }
