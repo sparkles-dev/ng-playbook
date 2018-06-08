@@ -1,6 +1,6 @@
-import { Injectable, ElementRef } from "@angular/core";
-import { ReframedUrl } from "./url";
-import { fromEvent, Observable } from "rxjs";
+import { Injectable, ElementRef } from '@angular/core';
+import { ReframedUrl } from './url';
+import { fromEvent, Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 export enum MessageTypes {
@@ -15,25 +15,24 @@ export interface Message {
 }
 
 export interface LaunchMessage {
-  type: MessageTypes.LAUNCH,
-  payload: ReframedUrl
+  type: MessageTypes.LAUNCH;
+  payload: ReframedUrl;
 }
 
 export interface CancelMessage {
-  type: MessageTypes.CANCEL,
-  payload: ReframedUrl
+  type: MessageTypes.CANCEL;
+  payload: ReframedUrl;
 }
 
 export interface FinishMessage {
-  type: MessageTypes.FINISH,
-  payload: ReframedUrl
+  type: MessageTypes.FINISH;
+  payload: ReframedUrl;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-
   public notify(target: ElementRef, type: string, payload: any): void {
     const msg = JSON.stringify({
       type,
@@ -46,28 +45,25 @@ export class MessageService {
       const window = target.nativeElement.contentWindow;
       window.postMessage(msg, '*');
     } else if (typeof target.nativeElement.postMessage === 'function') {
-debugger;
+      debugger;
       target.nativeElement.postMessage(msg, '*');
     }
-
   }
 
   public listen(): Observable<Message> {
-
-    return fromEvent(window, 'message')
-      .pipe(
-        map((event) => {
-          try {
-            const msgEvent = event as MessageEvent;
-            const msg: Message = JSON.parse(msgEvent.data);
-debugger;
-            return msg;
-          } catch (e) {
-            return undefined;
-          }
-        }),
-        filter(event => event !== undefined)
-      );
+    return fromEvent(window, 'message').pipe(
+      map(event => {
+        try {
+          const msgEvent = event as MessageEvent;
+          const msg: Message = JSON.parse(msgEvent.data);
+          debugger;
+          return msg;
+        } catch (e) {
+          return undefined;
+        }
+      }),
+      filter(event => event !== undefined)
+    );
   }
 
   public launch(target: ElementRef, payload: any) {
@@ -81,5 +77,4 @@ debugger;
   public cancel(target: ElementRef, payload: any) {
     this.notify(target, MessageTypes.CANCEL, payload);
   }
-
 }

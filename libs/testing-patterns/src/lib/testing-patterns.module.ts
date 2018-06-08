@@ -6,10 +6,6 @@ import { PipePipe } from './pipe.pipe';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    ComponentComponent,
-    DirectiveDirective,
-    PipePipe
-  ]
+  declarations: [ComponentComponent, DirectiveDirective, PipePipe]
 })
 export class TestingPatternsModule {}

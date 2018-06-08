@@ -8,7 +8,6 @@ import { GridCellComponent } from './grid-cell.component';
   template: `<ng-playbook-grid></ng-playbook-grid>`
 })
 export class TestingComponent {
-
   @ViewChild(GridComponent, { read: GridComponent })
   grid: GridComponent;
 
@@ -27,11 +26,7 @@ export class TestingComponent {
 describe('grid', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        GridComponent,
-        GridCellComponent,
-        TestingComponent
-      ]
+      declarations: [GridComponent, GridCellComponent, TestingComponent]
     }).compileComponents();
   });
 
@@ -44,13 +39,20 @@ describe('grid', () => {
   describe(`rows and columns`, () => {
     it(`should render css grid areas`, () => {
       const fixture = TestingComponent.create(
-        `<ng-playbook-grid [rows]="4" [columns]="3"></ng-playbook-grid>`);
+        `<ng-playbook-grid [rows]="4" [columns]="3"></ng-playbook-grid>`
+      );
       fixture.detectChanges();
-      const element = new DomElementRef(fixture.componentInstance.gridElementRef);
+      const element = new DomElementRef(
+        fixture.componentInstance.gridElementRef
+      );
 
-      const columnsProperty = element.getComputedStyle().getPropertyValue('grid-template-columns');
+      const columnsProperty = element
+        .getComputedStyle()
+        .getPropertyValue('grid-template-columns');
       expect(columnsProperty.split(' ').length).toEqual(3);
-      const rowsProperty = element.getComputedStyle().getPropertyValue('grid-template-rows');
+      const rowsProperty = element
+        .getComputedStyle()
+        .getPropertyValue('grid-template-rows');
       expect(rowsProperty.split(' ').length).toEqual(4);
     });
 
@@ -60,14 +62,19 @@ describe('grid', () => {
           [style.width]="'300px'"
           [style.height]="'400px'"
           [rows]="4"
-          [columns]="3"></ng-playbook-grid>`);
+          [columns]="3"></ng-playbook-grid>`
+      );
       fixture.detectChanges();
-      const element = new DomElementRef(fixture.componentInstance.gridElementRef);
+      const element = new DomElementRef(
+        fixture.componentInstance.gridElementRef
+      );
 
-      expect(element.getComputedStyle().getPropertyValue('grid-template-columns'))
-        .toEqual('100px 100px 100px');
-      expect(element.getComputedStyle().getPropertyValue('grid-template-rows'))
-        .toEqual('100px 100px 100px 100px');
+      expect(
+        element.getComputedStyle().getPropertyValue('grid-template-columns')
+      ).toEqual('100px 100px 100px');
+      expect(
+        element.getComputedStyle().getPropertyValue('grid-template-rows')
+      ).toEqual('100px 100px 100px 100px');
     });
   });
 
@@ -82,16 +89,19 @@ describe('grid', () => {
           <ng-playbook-grid-cell [x]="3" [y]="2">
             <p>bar</p>
           </ng-playbook-grid-cell>
-        </ng-playbook-grid>`);
+        </ng-playbook-grid>`
+      );
       fixture.detectChanges();
-      const element = new DomElementRef(fixture.componentInstance.gridElementRef);
+      const element = new DomElementRef(
+        fixture.componentInstance.gridElementRef
+      );
 
-      expect(element.getComputedStyle().getPropertyValue('grid-template-columns'))
-        .toEqual('100px 100px 100px');
-      expect(element.getComputedStyle().getPropertyValue('grid-template-rows'))
-        .toEqual('100px 100px 100px 100px');
+      expect(
+        element.getComputedStyle().getPropertyValue('grid-template-columns')
+      ).toEqual('100px 100px 100px');
+      expect(
+        element.getComputedStyle().getPropertyValue('grid-template-rows')
+      ).toEqual('100px 100px 100px 100px');
     });
-
   });
-
 });

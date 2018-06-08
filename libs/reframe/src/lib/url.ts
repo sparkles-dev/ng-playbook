@@ -10,7 +10,7 @@ export interface ReframedUrl {
   app?: string;
   action?: string;
   params?: {
-    [key: string]: any
+    [key: string]: any;
   };
 }
 
@@ -22,17 +22,19 @@ export function parse(value: string): ReframedUrl {
   };
 }
 
-export function build(app: string, action: string, params: {[key: string]: any}): ReframedUrl {
+export function build(
+  app: string,
+  action: string,
+  params: { [key: string]: any }
+): ReframedUrl {
   const paramString = Object.keys(params)
     .map(key => {
-
       return {
         key,
         value: params[key]
       };
     })
     .map(param => {
-
       return `${param.key}=${param.value}`;
     })
     .join(`&`);

@@ -1,5 +1,10 @@
 import { Component, ElementRef, ComponentRef, ViewChild } from '@angular/core';
-import { async, fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  fakeAsync,
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 import { DomElementRef } from '@ng-playbook/testing';
 import { B, A, R } from '@angular/cdk/keycodes';
 import { ComponentComponent } from './component.component';
@@ -8,14 +13,13 @@ describe('ComponentComponent (fixture testing)', () => {
   let component: ComponentComponent;
   let fixture: ComponentFixture<ComponentComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ComponentComponent
-      ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [ComponentComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComponentComponent);
@@ -48,14 +52,11 @@ describe('ComponentComponent (fixture testing)', () => {
   });
 });
 
-
 describe(`ComponentComponent (integration)`, () => {
-
   @Component({
     template: `<ng-playbook-component #component [value]="'foo'"></ng-playbook-component>`
   })
   class TestingComponent {
-
     @ViewChild('component', { read: ComponentComponent })
     public component: ComponentComponent;
 
@@ -77,12 +78,8 @@ describe(`ComponentComponent (integration)`, () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ComponentComponent,
-        TestingComponent
-      ]
-    })
-    .compileComponents();
+      declarations: [ComponentComponent, TestingComponent]
+    }).compileComponents();
   });
 
   describe(`value`, () => {
@@ -91,7 +88,9 @@ describe(`ComponentComponent (integration)`, () => {
       fixture.detectChanges();
       const element = fixture.componentInstance.domElementRef;
 
-      expect(element.querySelector('input[type="text"]').attribute('value')).toEqual('foo');
+      expect(
+        element.querySelector('input[type="text"]').attribute('value')
+      ).toEqual('foo');
     });
   });
 
@@ -100,28 +99,33 @@ describe(`ComponentComponent (integration)`, () => {
       const fixture = TestingComponent.create(
         `<ng-playbook-component #component
           [value]="'foo'"
-          [disabled]="true"></ng-playbook-component>`);
+          [disabled]="true"></ng-playbook-component>`
+      );
       fixture.detectChanges();
       const element = fixture.componentInstance.domElementRef;
 
-      expect(element.querySelector('input[type="text"]').attribute('disabled')).toBeTruthy();
+      expect(
+        element.querySelector('input[type="text"]').attribute('disabled')
+      ).toBeTruthy();
     });
   });
 
   describe(`valueChanges`, () => {
-    it(`should emit on each typed character`, fakeAsync(() => {
-      const fixture = TestingComponent.create();
-      let value = '';
-      fixture.componentInstance.component.valueChanges.subscribe(
-        (val) => {
+    it(
+      `should emit on each typed character`,
+      fakeAsync(() => {
+        const fixture = TestingComponent.create();
+        let value = '';
+        fixture.componentInstance.component.valueChanges.subscribe(val => {
           value = value + val;
-        }
-      );
+        });
 
-      const elem = fixture.componentInstance.domElementRef.querySelector('input');
-      elem.typeIn('bar');
-      expect(value).toEqual('bar');
-    }));
+        const elem = fixture.componentInstance.domElementRef.querySelector(
+          'input'
+        );
+        elem.typeIn('bar');
+        expect(value).toEqual('bar');
+      })
+    );
   });
-
 });

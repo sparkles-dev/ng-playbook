@@ -8,22 +8,21 @@ import { MyExternalComponent } from './entry/my-external.component';
 import { FooComponent } from './foo.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MyExternalComponent,
-    FooComponent
-  ],
+  declarations: [AppComponent, MyExternalComponent, FooComponent],
   imports: [
     BrowserModule,
     NxModule.forRoot(),
-    RouterModule.forRoot([
+    RouterModule.forRoot(
+      [
+        {
+          path: 'foo',
+          component: FooComponent
+        }
+      ],
       {
-        path: 'foo',
-        component: FooComponent
+        useHash: true
       }
-    ], {
-      useHash: true
-    }),
+    ),
     ReframeModule.forGuest([
       {
         path: 'one',

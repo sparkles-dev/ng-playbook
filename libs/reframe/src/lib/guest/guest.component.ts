@@ -1,10 +1,15 @@
-import { ReframedUrl } from "../url";
-import { Component, OnInit, AfterViewChecked, ViewChild, AfterViewInit } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { ReframedUrl } from '../url';
+import {
+  Component,
+  OnInit,
+  AfterViewChecked,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 export interface AppLaunch {
-
-  onAppLaunch(url: ReframedUrl)
+  onAppLaunch(url: ReframedUrl);
 }
 
 @Component({
@@ -14,9 +19,7 @@ export interface AppLaunch {
   template: `<router-outlet></router-outlet>`
 })
 export class GuestComponent implements OnInit, AfterViewInit, AfterViewChecked {
-
-  @ViewChild(RouterOutlet)
-  routerOutlet: RouterOutlet
+  @ViewChild(RouterOutlet) routerOutlet: RouterOutlet;
 
   ngOnInit() {
     debugger;
@@ -36,5 +39,4 @@ export class GuestComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewChecked() {
     debugger;
   }
-
 }

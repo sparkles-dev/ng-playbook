@@ -8,22 +8,15 @@ import { BrowserModule } from '@angular/platform-browser';
   selector: `ng-playbook-elements`,
   template: `elements works!`
 })
-export class ElementsComponent {
-}
+export class ElementsComponent {}
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule
-  ],
+  imports: [CommonModule, BrowserModule],
   declarations: [ElementsComponent],
   entryComponents: [ElementsComponent]
 })
 export class ElementalsModule {
-
-  constructor(
-    private injector: Injector
-  ) {}
+  constructor(private injector: Injector) {}
 
   ngDoBootstrap() {
     const element = createCustomElement(ElementsComponent, {
@@ -31,8 +24,8 @@ export class ElementalsModule {
     });
     customElements.define('ng-playbook-elements', element);
   }
-
 }
 
-platformBrowserDynamic().bootstrapModule(ElementalsModule)
+platformBrowserDynamic()
+  .bootstrapModule(ElementalsModule)
   .catch(err => console.log(err));

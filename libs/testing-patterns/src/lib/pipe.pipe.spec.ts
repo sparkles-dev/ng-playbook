@@ -4,7 +4,6 @@ import { PipePipe } from './pipe.pipe';
 import { TestBed } from '@angular/core/testing';
 
 describe('PipePipe (unit testing)', () => {
-
   it('create an instance', () => {
     const pipe = new PipePipe();
     expect(pipe).toBeTruthy();
@@ -21,7 +20,6 @@ describe('PipePipe (integraton testing)', () => {
     template: `<p #element>{{ 'foobar' | pipe }}</p>`
   })
   class TestingComponent {
-
     @ViewChild('element', { read: ElementRef })
     public elementRef: ElementRef;
 
@@ -37,16 +35,15 @@ describe('PipePipe (integraton testing)', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      declarations: [
-        TestingComponent,
-        PipePipe
-      ]
+      declarations: [TestingComponent, PipePipe]
     });
   });
 
   it('create transform input value', () => {
     const fixture = TestingComponent.create();
     fixture.detectChanges();
-    expect(fixture.componentInstance.domElementRef.innerHTML).toEqual(`Look, a foobar`);
+    expect(fixture.componentInstance.domElementRef.innerHTML).toEqual(
+      `Look, a foobar`
+    );
   });
 });

@@ -9,12 +9,11 @@ import { FormControlComponent } from './form-control.component';
   template: `<ng-playbook-form-control></ng-playbook-form-control>`
 })
 class TestingComponent {
-
   @ViewChild(FormControlComponent, { read: FormControlComponent })
-  public formControl: FormControlComponent
+  public formControl: FormControlComponent;
 
   @ViewChild(FormControlComponent, { read: ElementRef })
-  public formElementRef: ElementRef
+  public formElementRef: ElementRef;
 
   public get domElementRef(): DomElementRef {
     return new DomElementRef(this.formElementRef);
@@ -30,16 +29,10 @@ class TestingComponent {
 }
 
 describe(`FormControlComponent`, () => {
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        CommonModule
-      ],
-      declarations: [
-        FormControlComponent,
-        TestingComponent
-      ]
+      imports: [CommonModule],
+      declarations: [FormControlComponent, TestingComponent]
     });
   });
 
@@ -49,20 +42,12 @@ describe(`FormControlComponent`, () => {
   });
 
   describe(`Template-Driven Forms`, () => {
-
     let fixture: ComponentFixture<FormTestingComponent>;
-    beforeEach((done) => {
-      TestBed.resetTestingModule()
-        .configureTestingModule({
-          imports: [
-            CommonModule,
-            FormsModule
-          ],
-          declarations: [
-            FormControlComponent,
-            FormTestingComponent
-          ]
-        });
+    beforeEach(done => {
+      TestBed.resetTestingModule().configureTestingModule({
+        imports: [CommonModule, FormsModule],
+        declarations: [FormControlComponent, FormTestingComponent]
+      });
 
       fixture = TestBed.createComponent(FormTestingComponent);
       fixture.detectChanges();
@@ -81,26 +66,32 @@ describe(`FormControlComponent`, () => {
       model = '123';
 
       @ViewChild('control', { read: FormControlComponent })
-      public formControl: FormControlComponent
+      public formControl: FormControlComponent;
 
       @ViewChild('control', { read: ElementRef })
-      public formElementRef: ElementRef
+      public formElementRef: ElementRef;
 
       public get domElementRef(): DomElementRef {
         return new DomElementRef(this.formElementRef);
       }
     }
 
-    it(`should integrate with ngModel`, fakeAsync(() => {
-      // Non-working stuff:
-      // fixture.whenRenderingDone().then(() => { });
-      // fixture.whenStable().then(() => { });
+    it(
+      `should integrate with ngModel`,
+      fakeAsync(() => {
+        // Non-working stuff:
+        // fixture.whenRenderingDone().then(() => { });
+        // fixture.whenStable().then(() => { });
 
-      debugger;
-      expect(fixture.componentInstance.formControl.value).toEqual('foo');
-      expect(fixture.componentInstance.domElementRef.querySelector('input').attribute('value')).toEqual('foo');
-
-    }));
+        debugger;
+        expect(fixture.componentInstance.formControl.value).toEqual('foo');
+        expect(
+          fixture.componentInstance.domElementRef
+            .querySelector('input')
+            .attribute('value')
+        ).toEqual('foo');
+      })
+    );
   });
 
   xdescribe(`Reactive Forms`, () => {
@@ -110,8 +101,6 @@ describe(`FormControlComponent`, () => {
           <ng-playbook-form-control [(ngModel)]="foo"></ng-playbook-form-control>
         </form>
       `);
-
     });
   });
-
 });

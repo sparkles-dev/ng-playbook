@@ -1,28 +1,29 @@
-import { Injectable } from "@angular/core";
-import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-import { Observable } from "rxjs";
-import { MessageService, MessageTypes } from "../message.service";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import {
+  CanActivateChild,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from '@angular/router';
+import { Observable } from 'rxjs';
+import { MessageService, MessageTypes } from '../message.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class GuestLaunchedGuard implements CanActivateChild {
+  constructor(private messages: MessageService) {}
 
-  constructor(
-    private messages: MessageService
-  ) {}
+  canActivateChild(
+    childRoute: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> {
+    return this.messages.listen().pipe(
+      map(msg => {
+        debugger;
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+        // TODO: grab reference to intance of child component, call custom lifecycle hook
 
-    return this.messages.listen()
-      .pipe(
-        map(msg => {
-          debugger;
-
-          // TODO: grab reference to intance of child component, call custom lifecycle hook
-
-          return msg.type === MessageTypes.LAUNCH;
-        })
-      );
+        return msg.type === MessageTypes.LAUNCH;
+      })
+    );
   }
-
 }

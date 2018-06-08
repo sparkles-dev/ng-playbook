@@ -1,4 +1,13 @@
-import { Component, EventEmitter, OnInit, Output, Input, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  Input,
+  Renderer2,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 
 @Component({
   selector: 'ng-playbook-component',
@@ -11,38 +20,37 @@ import { Component, EventEmitter, OnInit, Output, Input, Renderer2, ViewChild, E
   `
 })
 export class ComponentComponent implements OnInit {
+  @Input() public value: any;
 
   @Input()
-  public value: any;
-
-  @Input()
-  public set disabled (value: boolean) {
+  public set disabled(value: boolean) {
     this._disabled = value;
 
     if (value === true) {
-      this.renderer.setAttribute(this.textfieldElementRef.nativeElement, 'disabled', 'disabled');
+      this.renderer.setAttribute(
+        this.textfieldElementRef.nativeElement,
+        'disabled',
+        'disabled'
+      );
     } else {
-      this.renderer.removeAttribute(this.textfieldElementRef.nativeElement, 'disabled');
+      this.renderer.removeAttribute(
+        this.textfieldElementRef.nativeElement,
+        'disabled'
+      );
     }
   }
 
-  @Output()
-  public valueChanges: EventEmitter<string> = new EventEmitter();
+  @Output() public valueChanges: EventEmitter<string> = new EventEmitter();
 
-  @ViewChild('textfield')
-  textfieldElementRef: ElementRef;
+  @ViewChild('textfield') textfieldElementRef: ElementRef;
 
   public _disabled = false;
 
-  constructor(
-    private renderer: Renderer2
-  ) {}
+  constructor(private renderer: Renderer2) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onKeyUp(evt: KeyboardEvent) {
     this.valueChanges.emit(this.textfieldElementRef.nativeElement.value);
   }
-
 }

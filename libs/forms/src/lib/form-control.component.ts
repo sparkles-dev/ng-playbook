@@ -1,4 +1,15 @@
-import { forwardRef, Component, EventEmitter, OnInit, Output, Input, Renderer2, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import {
+  forwardRef,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  Input,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -21,35 +32,35 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class FormControlComponent implements ControlValueAccessor, OnInit {
+  @Input() public value: any;
 
   @Input()
-  public value: any;
-
-  @Input()
-  public set disabled (value: boolean) {
+  public set disabled(value: boolean) {
     if (value === true) {
-      this.renderer.setAttribute(this.textfieldElementRef.nativeElement, 'disabled', 'disabled');
+      this.renderer.setAttribute(
+        this.textfieldElementRef.nativeElement,
+        'disabled',
+        'disabled'
+      );
     } else {
-      this.renderer.removeAttribute(this.textfieldElementRef.nativeElement, 'disabled');
+      this.renderer.removeAttribute(
+        this.textfieldElementRef.nativeElement,
+        'disabled'
+      );
     }
   }
 
-  @Output()
-  public valueChanges: EventEmitter<string> = new EventEmitter();
+  @Output() public valueChanges: EventEmitter<string> = new EventEmitter();
 
   /** @internal */
-  @ViewChild('textfield')
-  textfieldElementRef: ElementRef;
+  @ViewChild('textfield') textfieldElementRef: ElementRef;
 
   private onChange: (_: any) => void = () => {};
   private onTouched: () => void = () => {};
 
-  constructor(
-    private renderer: Renderer2
-  ) {}
+  constructor(private renderer: Renderer2) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onFocus() {
     this.onTouched();
@@ -92,5 +103,4 @@ export class FormControlComponent implements ControlValueAccessor, OnInit {
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
-
 }

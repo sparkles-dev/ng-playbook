@@ -8,9 +8,7 @@ import { CommonModule } from '@angular/common';
   template: `<div #directive ngPlaybookDirective></div>`
 })
 class TestingComponent {
-
-  @ViewChild('directive')
-  public directive: DirectiveDirective;
+  @ViewChild('directive') public directive: DirectiveDirective;
 
   @ViewChild('directive', { read: ElementRef })
   public elementRef: ElementRef;
@@ -29,14 +27,10 @@ class TestingComponent {
 }
 
 describe('DirectiveDirective (integration testing)', () => {
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ CommonModule ],
-      declarations: [
-        DirectiveDirective,
-        TestingComponent
-      ]
+      imports: [CommonModule],
+      declarations: [DirectiveDirective, TestingComponent]
     });
   });
 

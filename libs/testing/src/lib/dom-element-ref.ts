@@ -5,12 +5,9 @@ import { dispatchKeyboardEvent, typeInElement } from './dom-events';
  * Utility class to query the native DOM element.
  */
 export class DomElementRef {
-
   public readonly nativeElement;
 
-  constructor(
-    public readonly elementRef: ElementRef
-  ) {
+  constructor(public readonly elementRef: ElementRef) {
     if (!elementRef.nativeElement) {
       throw new Error(`DomElementRef: Cannot wrap an undefined nativeElement!`);
     }

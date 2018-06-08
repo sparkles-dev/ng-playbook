@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { AppLaunch, ReframedUrl } from "@ng-playbook/reframe";
+import { Component } from '@angular/core';
+import { AppLaunch, ReframedUrl } from '@ng-playbook/reframe';
 
 @Component({
   template: `
@@ -11,12 +11,10 @@ import { AppLaunch, ReframedUrl } from "@ng-playbook/reframe";
   `
 })
 export class MyExternalComponent implements AppLaunch {
-
   url: ReframedUrl;
 
   onAppLaunch(url: ReframedUrl) {
     debugger;
     this.url = url;
   }
-
 }
