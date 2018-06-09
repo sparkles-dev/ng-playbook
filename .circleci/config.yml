@@ -17,7 +17,7 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
-      - run: xvfb-run yarn test
+      - run: xvfb-run -a yarn ci:test
       - store_artifacts:
           path: ~/repo/dist
           destination: dist
