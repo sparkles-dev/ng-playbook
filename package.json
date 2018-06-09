@@ -1,5 +1,7 @@
 {
-  "name": "foo",
+  "name": "@ng-playbook",
+  "description": "Main package.json for the ng-playbook repo. It orchestrates all the apps and libs and more.",
+  "private": true,
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -25,7 +27,6 @@
     "help": "./node_modules/.bin/nx help",
     "ci:test": "ng test --single-run"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "6.0.1",
     "@angular/cdk": "^6.2.0",
