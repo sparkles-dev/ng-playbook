@@ -14,7 +14,8 @@
           "options": {
             "main": "libs/testing/src/test.ts",
             "tsConfig": "libs/testing/tsconfig.spec.json",
-            "karmaConfig": "libs/testing/karma.conf.js"
+            "karmaConfig": "libs/testing/karma.conf.js",
+            "watch": false
           }
         },
         "lint": {
@@ -106,7 +107,8 @@
             "assets": [
               "apps/playbook/src/favicon.ico",
               "apps/playbook/src/assets"
-            ]
+            ],
+            "watch": false
           }
         },
         "lint": {
@@ -156,7 +158,8 @@
           "options": {
             "main": "libs/testing-patterns/src/test.ts",
             "tsConfig": "libs/testing-patterns/tsconfig.spec.json",
-            "karmaConfig": "libs/testing-patterns/karma.conf.js"
+            "karmaConfig": "libs/testing-patterns/karma.conf.js",
+            "watch": false
           }
         },
         "lint": {
@@ -185,7 +188,8 @@
             "main": "libs/css-grid/src/test.ts",
             "tsConfig": "libs/css-grid/tsconfig.spec.json",
             "karmaConfig": "libs/css-grid/karma.conf.js",
-            "sourceMap": false
+            "sourceMap": false,
+            "watch": false
           }
         },
         "lint": {
@@ -214,7 +218,8 @@
             "main": "libs/forms/src/test.ts",
             "tsConfig": "libs/forms/tsconfig.spec.json",
             "karmaConfig": "libs/forms/karma.conf.js",
-            "sourceMap": false
+            "sourceMap": false,
+            "watch": false
           }
         },
         "lint": {
@@ -242,7 +247,8 @@
           "options": {
             "main": "libs/reframe/src/test.ts",
             "tsConfig": "libs/reframe/tsconfig.spec.json",
-            "karmaConfig": "libs/reframe/karma.conf.js"
+            "karmaConfig": "libs/reframe/karma.conf.js",
+            "watch": false
           }
         },
         "lint": {
@@ -334,7 +340,8 @@
             "assets": [
               "apps/madre/src/favicon.ico",
               "apps/madre/src/assets"
-            ]
+            ],
+            "watch": false
           }
         },
         "lint": {
@@ -448,7 +455,8 @@
             "assets": [
               "apps/figlio/src/favicon.ico",
               "apps/figlio/src/assets"
-            ]
+            ],
+            "watch": false
           }
         },
         "lint": {
@@ -498,7 +506,8 @@
           "options": {
             "main": "libs/elementals/src/test.ts",
             "tsConfig": "libs/elementals/tsconfig.spec.json",
-            "karmaConfig": "libs/elementals/karma.conf.js"
+            "karmaConfig": "libs/elementals/karma.conf.js",
+            "watch": false
           }
         },
         "lint": {
