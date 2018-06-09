@@ -1,17 +1,23 @@
 version: 2
+
+defaults: &defaults
+  docker:
+    - image: angular/ngcontainer
+  working_directory: ~/repo
+
 jobs:
   build:
-    working_directory: ~/app
-    docker:
-      - image: angular/ngcontainer
-
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum  "yarn.lock" }}
+          key: v1-dependencies-{{ checksum  "yarn.lock" }}
       - run: yarn install --frozen-lockfile --non-interactive
       - save_cache:
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
           paths:
-            - ~/app/node_modules
-          key: v1-{{ checksum  "yarn.lock" }}
-      - run: xvfb-run -a yarn test
+            - "node_modules"
+      - run: xvfb-run yarn test
+      - store_artifacts:
+          path: ~/repo/dist
+          destination: dist
