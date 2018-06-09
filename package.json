@@ -1,5 +1,5 @@
 {
-  "name": "@ng-playbook",
+  "name": "@ng-playbook/ng-playbook",
   "description": "Main package.json for the ng-playbook repo. It orchestrates all the apps and libs and more.",
   "private": true,
   "version": "0.0.0",
