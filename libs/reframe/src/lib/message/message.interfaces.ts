@@ -1,4 +1,4 @@
-import { ParsedUrl } from "./reframe.interfaces";
+import { ParsedUrl } from '../reframe.interfaces';
 
 export enum MessageTypes {
   LAUNCH = 'LAUNCH',

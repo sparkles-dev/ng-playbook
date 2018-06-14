@@ -1,19 +1,28 @@
-import { Directive, Input, Output, EventEmitter, OnDestroy, Renderer2, ElementRef } from "@angular/core";
-import { ParsedUrl } from "../reframe.interfaces";
-import { Message, MessageService } from "../message.service";
+import {
+  Directive,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+  Renderer2,
+  ElementRef
+} from '@angular/core';
+import { ParsedUrl } from '../reframe.interfaces';
+import { MessageService } from '../message/message.service';
+import { Message } from '../message/message.interfaces';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[reframeLaunch]'
 })
 export class HostDirective implements OnDestroy {
-
   @Input()
   public set reframeLaunch(value: string | ParsedUrl) {
     if (typeof value === 'string') {
       // TODO: parse url
     }
 
+    this.launch();
   }
 
   @Output() public messages: EventEmitter<Message> = new EventEmitter();
@@ -23,6 +32,8 @@ export class HostDirective implements OnDestroy {
   @Output() public loaded: EventEmitter<any> = new EventEmitter();
 
   private unsubscribeFn: Function;
+  private iframeUrl: string;
+  private parsedUrl: ParsedUrl;
 
   constructor(
     private elementRef: ElementRef,
@@ -36,13 +47,13 @@ export class HostDirective implements OnDestroy {
     }
   }
 
-  private launch(iframeUrl: string, url: string) {
+  private launch() {
     this.unsubscribeFn = this.renderer.listen(
       this.elementRef.nativeElement,
       'load',
       () => {
-        this.msgService.launch(this.elementRef, url);
-        this.msgService.listen().subscribe(v => this.messages.next(v));
+        this.msgService.launch(this.elementRef, this.parsedUrl);
+        this.msgService.messages$.subscribe(v => this.messages.next(v));
 
         this.loaded.next();
       }
@@ -52,8 +63,7 @@ export class HostDirective implements OnDestroy {
     this.renderer.setAttribute(
       this.elementRef.nativeElement,
       'src',
-      iframeUrl
+      this.iframeUrl
     );
   }
-
 }

@@ -1,5 +1,5 @@
 import { Directive, HostListener, ElementRef } from '@angular/core';
-import { MessageService } from '../message.service';
+import { MessageService } from '../message/message.service';
 
 @Directive({
   // tslint:disable-next-line:directive-selector

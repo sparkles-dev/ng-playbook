@@ -1,8 +1,15 @@
+// GUEST
 export * from './lib/guest/cancel.directive';
 export * from './lib/guest/finish.directive';
 export * from './lib/guest/guest.component';
+
+// HOST
 export * from './lib/host/host.directive';
-export * from './lib/message.interfaces';
-export * from './lib/message.service';
+
+// MESSAGE
+export * from './lib/message/message.interfaces';
+export * from './lib/message/message.service';
+
+// REFRAME MODULE
+export * from './lib/reframe.interfaces';
 export * from './lib/reframe.module';
-export * from './lib/url';

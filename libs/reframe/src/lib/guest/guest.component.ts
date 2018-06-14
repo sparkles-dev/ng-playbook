@@ -11,14 +11,15 @@ import {
   OnDestroy
 } from '@angular/core';
 import { filter } from 'rxjs/operators';
-import { MessageTypes, LaunchMessage } from '../message.interfaces';
-import { MessageService } from '../message.service';
+import { MessageTypes, LaunchMessage } from '../message/message.interfaces';
+import { MessageService } from '../message/message.service';
 import { ENTRIES, Entry, isAppLaunch, ParsedUrl } from '../reframe.interfaces';
 
 @Component({
   template: `<ng-container #outlet></ng-container>`
 })
-export class GuestComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+export class GuestComponent
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChild('outlet', { read: ViewContainerRef })
   outlet: ViewContainerRef;
 
@@ -30,24 +31,19 @@ export class GuestComponent implements OnInit, OnDestroy, AfterViewInit, AfterVi
     private message: MessageService
   ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.cleanComponentRef();
   }
 
   ngAfterViewInit() {
-    this.message.listen()
-      .pipe(
-        filter(msg => msg.type === MessageTypes.LAUNCH)
-      ).subscribe(
-        (msg: LaunchMessage) => this.createComponent(msg.payload)
-      );
+    this.message.messages$
+      .pipe(filter(msg => msg.type === MessageTypes.LAUNCH))
+      .subscribe((msg: LaunchMessage) => this.createComponent(msg.payload));
   }
 
-  ngAfterViewChecked() {
-  }
+  ngAfterViewChecked() {}
 
   private createComponent(url: ParsedUrl) {
     const entry = this.entries.find(e => e.path === url.entryPoint);
@@ -69,5 +65,4 @@ export class GuestComponent implements OnInit, OnDestroy, AfterViewInit, AfterVi
       this.componentRef.destroy();
     }
   }
-
 }

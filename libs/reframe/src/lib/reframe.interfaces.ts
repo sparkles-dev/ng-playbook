@@ -1,12 +1,17 @@
-import { InjectionToken, Type, ValueProvider, ANALYZE_FOR_ENTRY_COMPONENTS } from "@angular/core";
+import {
+  InjectionToken,
+  Type,
+  ValueProvider,
+  ANALYZE_FOR_ENTRY_COMPONENTS
+} from '@angular/core';
 
 export interface ParsedUrl {
   url: string;
   appName: string;
   entryPoint: string;
   params?: {
-    [key: string]: any
-  }
+    [key: string]: any;
+  };
 }
 
 export interface AppLaunch {
@@ -21,11 +26,9 @@ export interface Entry {
 export const ENTRIES = new InjectionToken<Entry[]>('reframe: entries');
 
 export function provideEntries(entries: Entry[]): ValueProvider[] {
-
   return [
     {
       provide: ENTRIES,
-      multi: true,
       useValue: entries
     },
     {
