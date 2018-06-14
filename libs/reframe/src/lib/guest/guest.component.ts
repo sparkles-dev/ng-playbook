@@ -1,42 +1,73 @@
-import { ReframedUrl } from '../url';
 import {
   Component,
   OnInit,
   AfterViewChecked,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  Inject,
+  ComponentRef,
+  OnDestroy
 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
-export interface AppLaunch {
-  onAppLaunch(url: ReframedUrl);
-}
+import { filter } from 'rxjs/operators';
+import { MessageTypes, LaunchMessage } from '../message.interfaces';
+import { MessageService } from '../message.service';
+import { ENTRIES, Entry, isAppLaunch, ParsedUrl } from '../reframe.interfaces';
 
 @Component({
-  // XX ... maybe do not use router at all?
-  //    ... use dynamic components directly?
-  //    ... make this a host for the dynamic components (the entry points) in the child app?
-  template: `<router-outlet></router-outlet>`
+  template: `<ng-container #outlet></ng-container>`
 })
-export class GuestComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  @ViewChild(RouterOutlet) routerOutlet: RouterOutlet;
+export class GuestComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+  @ViewChild('outlet', { read: ViewContainerRef })
+  outlet: ViewContainerRef;
+
+  private componentRef: ComponentRef<any>;
+
+  constructor(
+    private cfr: ComponentFactoryResolver,
+    @Inject(ENTRIES) private entries: Entry[],
+    private message: MessageService
+  ) {}
 
   ngOnInit() {
-    debugger;
+  }
+
+  ngOnDestroy() {
+    this.cleanComponentRef();
   }
 
   ngAfterViewInit() {
-    const component = this.routerOutlet.component;
-
-    // TODO ... ExpressionChangedAfterItHasBeenCheckedError
-    (component as any).onAppLaunch({
-      url: 'foooooo .. why not working?!?!'
-    });
-
-    debugger;
+    this.message.listen()
+      .pipe(
+        filter(msg => msg.type === MessageTypes.LAUNCH)
+      ).subscribe(
+        (msg: LaunchMessage) => this.createComponent(msg.payload)
+      );
   }
 
   ngAfterViewChecked() {
-    debugger;
   }
+
+  private createComponent(url: ParsedUrl) {
+    const entry = this.entries.find(e => e.path === url.entryPoint);
+    if (entry) {
+      const factory = this.cfr.resolveComponentFactory(entry.component);
+
+      this.cleanComponentRef();
+      this.componentRef = this.outlet.createComponent(factory);
+
+      const component = this.componentRef.instance;
+      if (isAppLaunch(component)) {
+        component.onAppLaunch(url);
+      }
+    }
+  }
+
+  private cleanComponentRef() {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
+  }
+
 }

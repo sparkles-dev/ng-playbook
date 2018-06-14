@@ -2,6 +2,7 @@ import { Directive, HostListener, ElementRef } from '@angular/core';
 import { MessageService } from '../message.service';
 
 @Directive({
+  // tslint:disable-next-line:directive-selector
   selector: '[reframeCancel]'
 })
 export class CancelDirective {
@@ -9,7 +10,6 @@ export class CancelDirective {
 
   @HostListener('click')
   public onClick() {
-    debugger;
     this.messages.cancel(new ElementRef(window.parent), '');
   }
 }
