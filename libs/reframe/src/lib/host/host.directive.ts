@@ -10,6 +10,8 @@ import {
 import { ParsedUrl } from '../reframe.interfaces';
 import { MessageService } from '../message/message.service';
 import { Message } from '../message/message.interfaces';
+import { UrlSerializer } from '../url/url-seralizer.service';
+import { IframeUrlResolver } from '../url/iframe-url-resolver.servie';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -19,8 +21,11 @@ export class HostDirective implements OnDestroy {
   @Input()
   public set reframeLaunch(value: string | ParsedUrl) {
     if (typeof value === 'string') {
-      // TODO: parse url
+      this.parsedUrl = this.urlSerializer.deserialize(value);
+    } else {
+      this.parsedUrl = value;
     }
+    this.iframeUrl = this.iframeUrlResolver.resolveIframeUrl(this.parsedUrl);
 
     this.launch();
   }
@@ -38,7 +43,9 @@ export class HostDirective implements OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private msgService: MessageService
+    private msgService: MessageService,
+    private urlSerializer: UrlSerializer,
+    private iframeUrlResolver: IframeUrlResolver
   ) {}
 
   ngOnDestroy(): void {

@@ -9,49 +9,41 @@ import { CancelDirective } from './guest/cancel.directive';
 import { FinishDirective } from './guest/finish.directive';
 import { GuestComponent } from './guest/guest.component';
 import { HostDirective } from './host/host.directive';
-import { provideEntries, Entry } from './reframe.interfaces';
+import { MessageService } from './message/message.service';
+import { UrlSerializer } from './url/url-seralizer.service';
+import { IframeUrlResolver } from './url/iframe-url-resolver.servie';
+import {
+  provideEntries,
+  Entry,
+  IframeUrlResolverOptions
+} from './reframe.interfaces';
+
+const COMMON_PROVIDERS = [MessageService, UrlSerializer];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  declarations: [
-    GuestComponent,
-    CancelDirective,
-    FinishDirective
-  ],
-  exports: [
-    GuestComponent,
-    CancelDirective,
-    FinishDirective
-  ]
+  imports: [CommonModule, RouterModule],
+  declarations: [GuestComponent, CancelDirective, FinishDirective],
+  exports: [GuestComponent, CancelDirective, FinishDirective]
 })
 export class ReframeGuestModule {}
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-    HostDirective
-  ],
-  exports: [
-    HostDirective
-  ]
+  imports: [CommonModule],
+  declarations: [HostDirective],
+  exports: [HostDirective]
 })
 export class ReframeHostModule {}
 
 @NgModule({
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule]
 })
 export class ReframeModule {
-
-  public static forHost(): ModuleWithProviders {
+  public static forHost(
+    options?: IframeUrlResolverOptions
+  ): ModuleWithProviders {
     return {
-      ngModule: ReframeHostModule
+      ngModule: ReframeHostModule,
+      providers: [...COMMON_PROVIDERS, IframeUrlResolver]
     };
   }
 
@@ -63,14 +55,15 @@ export class ReframeModule {
         provideRoutes([
           {
             path: 'external',
-            children: [{
-              path: '**',
-              component: GuestComponent
-            }]
+            children: [
+              {
+                path: '**',
+                component: GuestComponent
+              }
+            ]
           }
         ])
       ]
     };
   }
-
 }

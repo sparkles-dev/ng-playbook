@@ -18,6 +18,10 @@ export interface AppLaunch {
   onAppLaunch(url: ParsedUrl);
 }
 
+export function isAppLaunch(value: any): value is AppLaunch {
+  return value !== undefined && typeof value['onAppLaunch'] === 'function';
+}
+
 export interface Entry {
   path: string;
   component: Type<any>;
@@ -39,6 +43,19 @@ export function provideEntries(entries: Entry[]): ValueProvider[] {
   ];
 }
 
-export function isAppLaunch(value: any): value is AppLaunch {
-  return value !== undefined && typeof value['onAppLaunch'] === 'function';
+export interface IframeUrlResolverOptions {
+  prefix: string;
+}
+
+export const IFRAME_URL_RESOLVER_OPTIONS = new InjectionToken<
+  IframeUrlResolverOptions
+>('reframe: iframe url resolver options');
+
+export function provideIframeUrlResolverOptions(
+  options: IframeUrlResolverOptions
+): ValueProvider {
+  return {
+    provide: IFRAME_URL_RESOLVER_OPTIONS,
+    useValue: options
+  };
 }
