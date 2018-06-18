@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     NxModule.forRoot(),
     ReframeModule.forHost({
-      prefix: 'http://localhost:4300/'
+      prefix: 'http://localhost:4300/',
+      urlScheme: 'u://'
     })
   ],
   providers: [],
