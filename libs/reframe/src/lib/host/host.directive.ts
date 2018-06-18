@@ -5,19 +5,22 @@ import {
   EventEmitter,
   OnDestroy,
   Renderer2,
-  ElementRef
+  ElementRef,
+  NgZone,
+  OnInit
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ParsedUrl } from '../reframe.interfaces';
-import { MessageService } from '../message/message.service';
 import { Message } from '../message/message.interfaces';
-import { UrlSerializer } from '../url/url-seralizer.service';
-import { IframeUrlResolver } from '../url/iframe-url-resolver.servie';
+import { MessageService } from '../message/message.service';
+import { UrlSerializer } from '../url/url-serializer.service';
+import { IframeUrlResolver } from '../url/iframe-url-resolver.service';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[reframeLaunch]'
 })
-export class HostDirective implements OnDestroy {
+export class HostDirective implements OnInit, OnDestroy {
   @Input()
   public set reframeLaunch(value: string | ParsedUrl) {
     if (typeof value === 'string') {
@@ -30,13 +33,12 @@ export class HostDirective implements OnDestroy {
     this.launch();
   }
 
-  @Output() public messages: EventEmitter<Message> = new EventEmitter();
+  @Output() public reframeMessage: EventEmitter<Message> = new EventEmitter();
 
-  @Output() public load: EventEmitter<any> = new EventEmitter();
-
-  @Output() public loaded: EventEmitter<any> = new EventEmitter();
+  @Output() public reframeLoad: EventEmitter<any> = new EventEmitter();
 
   private unsubscribeFn: Function;
+  private subscriptions: Subscription[] = [];
   private iframeUrl: string;
   private parsedUrl: ParsedUrl;
 
@@ -44,33 +46,53 @@ export class HostDirective implements OnDestroy {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private msgService: MessageService,
+    private ngZone: NgZone,
     private urlSerializer: UrlSerializer,
     private iframeUrlResolver: IframeUrlResolver
   ) {}
 
+  ngOnInit() {
+    const sub = this.msgService.messages$.subscribe(value => {
+      this.ngZone.runTask(() => {
+        this.reframeMessage.next(value);
+      });
+    });
+    this.subscriptions = this.subscriptions.concat(sub);
+  }
+
   ngOnDestroy(): void {
-    if (this.unsubscribeFn) {
-      this.unsubscribeFn();
-    }
+    this.clearListener();
+
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   private launch() {
-    this.unsubscribeFn = this.renderer.listen(
-      this.elementRef.nativeElement,
-      'load',
-      () => {
-        this.msgService.launch(this.elementRef, this.parsedUrl);
-        this.msgService.messages$.subscribe(v => this.messages.next(v));
+    this.clearListener();
 
-        this.loaded.next();
-      }
-    );
-
-    this.load.next();
     this.renderer.setAttribute(
       this.elementRef.nativeElement,
       'src',
       this.iframeUrl
     );
+
+    this.unsubscribeFn = this.renderer.listen(
+      this.elementRef.nativeElement,
+      'load',
+      () => {
+        this.onIframeLoaded();
+      }
+    );
+  }
+
+  private onIframeLoaded() {
+    this.msgService.launch(this.elementRef, this.parsedUrl);
+
+    this.reframeLoad.next();
+  }
+
+  private clearListener() {
+    if (this.unsubscribeFn) {
+      this.unsubscribeFn();
+    }
   }
 }

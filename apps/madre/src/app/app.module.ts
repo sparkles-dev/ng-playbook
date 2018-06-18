@@ -6,7 +6,13 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, NxModule.forRoot(), ReframeModule.forHost()],
+  imports: [
+    BrowserModule,
+    NxModule.forRoot(),
+    ReframeModule.forHost({
+      prefix: 'http://localhost:4300/'
+    })
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

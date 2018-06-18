@@ -43,19 +43,23 @@ export function provideEntries(entries: Entry[]): ValueProvider[] {
   ];
 }
 
-export interface IframeUrlResolverOptions {
+export interface ReframeOptions {
   prefix: string;
+  urlScheme: string;
 }
 
-export const IFRAME_URL_RESOLVER_OPTIONS = new InjectionToken<
-  IframeUrlResolverOptions
->('reframe: iframe url resolver options');
+export const REFRAME_OPTIONS_DEFAULTS = {
+  prefix: '/',
+  urlScheme: 'u://'
+};
 
-export function provideIframeUrlResolverOptions(
-  options: IframeUrlResolverOptions
-): ValueProvider {
+export const REFRAME_OPTIONS = new InjectionToken<ReframeOptions>(
+  'reframe: options'
+);
+
+export function provideReframeOptions(options: ReframeOptions): ValueProvider {
   return {
-    provide: IFRAME_URL_RESOLVER_OPTIONS,
+    provide: REFRAME_OPTIONS,
     useValue: options
   };
 }

@@ -1,7 +1,5 @@
 import { ParsedUrl } from '../reframe.interfaces';
 
-const PREFIX = 'u://';
-
 const QUERY_PARAM_RE = /^[^=?&#]+/;
 // Return the name of the query param at the start of the string or an empty string
 function matchQueryParamName(str: string): string {
@@ -25,14 +23,16 @@ function decodeQuery(s: string): string {
 export class UrlParser {
   private remaining: string;
 
-  constructor(url: string) {
+  constructor(url: string, private scheme: string) {
     this.remaining = url;
   }
 
   parse(): ParsedUrl {
     const url = '' + this.remaining;
-    if (!this.consumeOptional(PREFIX)) {
-      throw new Error(`Url must start with ${PREFIX}, given ${this.remaining}`);
+    if (!this.consumeOptional(this.scheme)) {
+      throw new Error(
+        `Url must start with ${this.scheme}, given ${this.remaining}`
+      );
     }
 
     const appName = this.captureOptional('/');
@@ -111,12 +111,12 @@ export class UrlParser {
   }
 }
 
-export function deserializeUrl(url: string): ParsedUrl {
-  return new UrlParser(url).parse();
+export function deserializeUrl(url: string, scheme: string): ParsedUrl {
+  return new UrlParser(url, scheme).parse();
 }
 
-export function serializeUrl(url: ParsedUrl) {
-  let urlString = `${PREFIX}/${url.appName}/${url.entryPoint}`;
+export function serializeUrl(url: ParsedUrl, scheme: string) {
+  let urlString = `${scheme}/${url.appName}/${url.entryPoint}`;
 
   if (url.params) {
     const queryString = Object.keys(url.params)

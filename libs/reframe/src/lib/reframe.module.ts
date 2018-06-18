@@ -10,12 +10,14 @@ import { FinishDirective } from './guest/finish.directive';
 import { GuestComponent } from './guest/guest.component';
 import { HostDirective } from './host/host.directive';
 import { MessageService } from './message/message.service';
-import { UrlSerializer } from './url/url-seralizer.service';
-import { IframeUrlResolver } from './url/iframe-url-resolver.servie';
+import { UrlSerializer } from './url/url-serializer.service';
+import { IframeUrlResolver } from './url/iframe-url-resolver.service';
 import {
   provideEntries,
   Entry,
-  IframeUrlResolverOptions
+  ReframeOptions,
+  REFRAME_OPTIONS_DEFAULTS,
+  provideReframeOptions
 } from './reframe.interfaces';
 
 const COMMON_PROVIDERS = [MessageService, UrlSerializer];
@@ -38,12 +40,14 @@ export class ReframeHostModule {}
   imports: [CommonModule]
 })
 export class ReframeModule {
-  public static forHost(
-    options?: IframeUrlResolverOptions
-  ): ModuleWithProviders {
+  public static forHost(options?: ReframeOptions): ModuleWithProviders {
     return {
       ngModule: ReframeHostModule,
-      providers: [...COMMON_PROVIDERS, IframeUrlResolver]
+      providers: [
+        ...COMMON_PROVIDERS,
+        IframeUrlResolver,
+        provideReframeOptions(options || REFRAME_OPTIONS_DEFAULTS)
+      ]
     };
   }
 

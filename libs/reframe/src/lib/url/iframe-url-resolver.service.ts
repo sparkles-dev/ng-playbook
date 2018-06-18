@@ -1,16 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import {
   ParsedUrl,
-  IFRAME_URL_RESOLVER_OPTIONS,
-  IframeUrlResolverOptions
+  REFRAME_OPTIONS,
+  ReframeOptions
 } from '../reframe.interfaces';
 
 @Injectable()
 export class IframeUrlResolver {
-  constructor(
-    @Inject(IFRAME_URL_RESOLVER_OPTIONS)
-    private options: IframeUrlResolverOptions
-  ) {}
+  constructor(@Inject(REFRAME_OPTIONS) private options: ReframeOptions) {}
 
   public resolveIframeUrl(url: ParsedUrl) {
     let value = this.options.prefix.concat('u/', url.appName, '/');

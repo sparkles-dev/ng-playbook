@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Message } from '@ng-playbook/reframe';
 
 @Component({
   selector: 'ng-playbook-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ng-playbook';
+  loading = false;
+  messages: Message[] = [];
+
+  onMessage(msg: Message) {
+    this.messages.push(msg);
+  }
 }

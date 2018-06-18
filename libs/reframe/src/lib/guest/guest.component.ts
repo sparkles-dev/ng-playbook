@@ -57,6 +57,8 @@ export class GuestComponent
       if (isAppLaunch(component)) {
         component.onAppLaunch(url);
       }
+
+      this.componentRef.changeDetectorRef.detectChanges();
     }
   }
 

@@ -25,3 +25,15 @@ export interface FinishMessage {
   type: MessageTypes.FINISH;
   payload: ParsedUrl;
 }
+
+export function isLaunchMessage(value: any): value is LaunchMessage {
+  return value !== undefined && value.type === MessageTypes.LAUNCH;
+}
+
+export function isCancelMessage(value: any): value is CancelMessage {
+  return value !== undefined && value.type === MessageTypes.CANCEL;
+}
+
+export function isFinishMessage(value: any): value is FinishMessage {
+  return value !== undefined && value.type === MessageTypes.FINISH;
+}
