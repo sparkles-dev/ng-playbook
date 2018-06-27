@@ -45,7 +45,7 @@
     "@ngrx/store-devtools": "6.0.1",
     "@nrwl/nx": "6.1.0",
     "core-js": "^2.5.4",
-    "ngrx-store-freeze": "0.2.2",
+    "ngrx-store-freeze": "0.2.4",
     "rxjs": "6.0.0",
     "rxjs-compat": "6.2.1",
     "zone.js": "^0.8.26"
