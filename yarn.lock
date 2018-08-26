@@ -16,13 +16,6 @@
     "@angular-devkit/core" "0.7.3"
     rxjs "^6.0.0"
 
-"@angular-devkit/architect@0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.7.3.tgz#d51f1c58c53f51be4a9789f11dfccdbbc4a56f25"
-  dependencies:
-    "@angular-devkit/core" "0.7.3"
-    rxjs "^6.0.0"
-
 "@angular-devkit/build-angular@~0.6.1":
   version "0.6.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-0.6.8.tgz#ea108509f970efc9cd9087a47894c0164dd2d0c0"
@@ -100,15 +93,6 @@
 "@angular-devkit/core@0.6.8":
   version "0.6.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-0.6.8.tgz#3b09d97bd2588f0091df11921f7ed772431806aa"
-  dependencies:
-    ajv "~6.4.0"
-    chokidar "^2.0.3"
-    rxjs "^6.0.0"
-    source-map "^0.5.6"
-
-"@angular-devkit/core@0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-0.7.3.tgz#a18f7b922390503b5226b3d64c4c54fb43ad15e2"
   dependencies:
     ajv "~6.4.0"
     chokidar "^2.0.3"
@@ -251,13 +235,13 @@
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
 
-"@nrwl/nx@6.2.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx/-/nx-6.2.0.tgz#7737846a5d03bc25e0d9cd418e9bde11697c85ad"
+"@nrwl/nx@6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx/-/nx-6.2.1.tgz#b75a5c35bab53675a89320e1d8d16f40b70e66d1"
 
-"@nrwl/schematics@6.2.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/schematics/-/schematics-6.2.0.tgz#bb84ebda6846cf2e8b431086bf232fc785d8ccdb"
+"@nrwl/schematics@6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/schematics/-/schematics-6.2.1.tgz#11473af8f5f3c078b65ebd47fb8bfbde93912163"
   dependencies:
     "@types/yargs" "^11.0.0"
     app-root-path "^2.0.1"
